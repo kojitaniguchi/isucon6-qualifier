@@ -7,6 +7,7 @@ require 'mysql2-cs-bind'
 require 'rack/utils'
 require 'sinatra/base'
 
+
 module Isutar
   class Web < ::Sinatra::Base
     enable :protection

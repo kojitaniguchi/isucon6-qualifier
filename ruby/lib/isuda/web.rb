@@ -10,6 +10,7 @@ require 'rack/utils'
 require 'sinatra/base'
 require 'tilt/erubis'
 
+
 module Isuda
   class Web < ::Sinatra::Base
     enable :protection
