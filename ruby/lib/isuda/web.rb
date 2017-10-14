@@ -9,14 +9,11 @@ require 'mysql2-cs-bind'
 require 'rack/utils'
 require 'sinatra/base'
 require 'tilt/erubis'
-require 'rack-lineprof'
 
 module Isuda
   class Web < ::Sinatra::Base
     enable :protection
     enable :sessions
-
-    use Rack::Lineprof
 
     set :erb, escape_html: true
     set :public_folder, File.expand_path('../../../../public', __FILE__)
@@ -93,7 +90,7 @@ module Isuda
       end
 
       def htmlify(content)
-        keywords = db.xquery(%| select * from entry order by character_length(keyword) desc |)
+        keywords = db.xquery(%| select keyword from entry order by character_length(keyword) desc |)
         pattern = keywords.map {|k| Regexp.escape(k[:keyword]) }.join('|')
         kw2hash = {}
         hashed_content = content.gsub(/(#{pattern})/) {|m|
